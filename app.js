@@ -16,6 +16,7 @@ function drawCat() {
             <h4>name: ${cat.name}</h4>
             <h4>happiness: ${cat.mood[cat.moodIndex]}</h4>
             <button onclick="petCat()">Pet</button>
+            <button onclick="catNip()">CatNip</button>
           </div>
         </div>
       </div>
@@ -33,6 +34,11 @@ function drawCat() {
 //catNip
   //reset pets to 0
   //reset mood index
+  function catNip() {
+    cat.pets=0
+    cat.moodIndex=0
+    drawCat()
+  }
 
 function petCat(){
   cat.pets++

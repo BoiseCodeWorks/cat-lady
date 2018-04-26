@@ -1,5 +1,5 @@
 var cat = {
-  img : "https://img.etsystatic.com/il/37657c/637638639/il_fullxfull.637638639_32sw.jpg?version=0",
+  img : "https://i.imgflip.com/kqy15.jpg",
   name : "Mr. Snibbly",
   mood : ["happy", "bitey", "shanky"],
   tolerance : 3,
@@ -8,12 +8,10 @@ var cat = {
 }
 
 function drawCat() {
-  var template = ''
-  
-    template += `
+  var template = `
     <div class="col">
         <div class="card">
-          <img src="${cat.img}" alt="">
+          <img id="cat-pic" src="${cat.img}" alt="">
           <div class="card-body">
             <h4>name: ${cat.name}</h4>
             <h4>happiness: ${cat.mood[cat.moodIndex]}</h4>
@@ -24,4 +22,34 @@ function drawCat() {
     `
     document.getElementById('cat').innerHTML = template
 }
+
+//petCat
+  //increase pets by 1
+  //check if pets is > than tolerance
+    //change mood index to 1
+    //drawCat
+  
+
+//catNip
+  //reset pets to 0
+  //reset mood index
+
+function petCat(){
+  cat.pets++
+  if (cat.pets==cat.tolerance){
+    cat.moodIndex++
+    drawCat()
+  }
+  if (cat.pets==cat.tolerance*2){
+    cat.moodIndex++
+    drawCat()
+    document.getElementById("cat-pic").hidden=true
+  }
+  
+}
+
+
+
+
+
 drawCat()

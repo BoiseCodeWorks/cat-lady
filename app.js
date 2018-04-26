@@ -1,13 +1,31 @@
-var cat = {
-  img : "https://i.imgflip.com/kqy15.jpg",
-  name : "Mr. Snibbly",
-  mood : ["happy", "bitey", "shanky"],
-  tolerance : 3,
-  pets : 0,
-  moodIndex : 0
+// var cat = {
+//   img: "https://i.imgflip.com/kqy15.jpg",
+//   name: "Mr. Snibbly",
+//   mood: ["happy", "bitey", "shanky"],
+//   tolerance: 3,
+//   pets: 0,
+//   moodIndex: 0
+// };
+
+function Cat(name, img, tolerance){
+  this.name = name
+  this.img = img
+  this.tolerance = tolerance
+  this.mood = ["happy", "bitey", "ran-away"]
+  this.pets = 0
+  this.moodIndex = 0
 }
 
-function drawCat() {
+
+var mrSnibbley = new Cat('Snibbley', 'https://i.imgflip.com/kqy15.jpg', 3)
+var Garfield = new Cat('Garfield', 'https://i.imgflip.com/kqy15.jpg', 8)
+
+var cats = {
+  Snibbley: mrSnibbley,
+  Garfield: Garfield
+}
+
+function drawCat(cat) {
   var template = `
     <div class="col">
         <div class="card">
@@ -15,47 +33,41 @@ function drawCat() {
           <div class="card-body">
             <h4>name: ${cat.name}</h4>
             <h4>happiness: ${cat.mood[cat.moodIndex]}</h4>
-            <button onclick="petCat()">Pet</button>
-            <button onclick="catNip()">CatNip</button>
+            <button onclick="petCat('${cat.name}')">Pet: ${cat.pets}</button>
+            <button onclick="catNip('${cat.name}')">CatNip</button>
           </div>
         </div>
       </div>
     `
-    document.getElementById('cat').innerHTML = template
+  document.getElementById("cat").innerHTML = template;
 }
 
-//petCat
-  //increase pets by 1
-  //check if pets is > than tolerance
-    //change mood index to 1
-    //drawCat
-  
+function catNip(catName) {
+  cats[catName].pets = 0;
+  cats[catName].moodIndex = 0;
+  drawCat(cats[catName]);
+}
 
-//catNip
-  //reset pets to 0
-  //reset mood index
-  function catNip() {
-    cat.pets=0
-    cat.moodIndex=0
-    drawCat()
-  }
+function petCat(catName) {
+  var testCat = cats[catName]
+  debugger
+  cats[catName].pets++;
+  toleranceCheck(cats[catName]);
+  drawCat(cats[catName]);
+}
 
-function petCat(){
-  cat.pets++
-  if (cat.pets==cat.tolerance){
-    cat.moodIndex++
-    drawCat()
+function toleranceCheck(catObject){
+  if (catObject.pets == catObject.tolerance) {
+    catObject.moodIndex++;
   }
-  if (cat.pets==cat.tolerance*2){
-    cat.moodIndex++
-    drawCat()
-    document.getElementById("cat-pic").hidden=true
+  if (catObject.pets == catObject.tolerance * 2) {
+    catObject.moodIndex++;
+    document.getElementById("cat-pic").hidden = true;
   }
-  
 }
 
 
 
+drawCat(Garfield);
 
 
-drawCat()
